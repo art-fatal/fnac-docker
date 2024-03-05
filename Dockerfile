@@ -13,5 +13,6 @@ RUN docker-php-ext-install zip
 COPY apache/sites-available/* /etc/apache2/sites-available/
 
 RUN a2ensite fnac.conf
+RUN a2enmod rewrite
 
 EXPOSE 80
