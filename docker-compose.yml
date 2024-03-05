@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.3.0
+    command: --sql_mode=""
+    container_name: fnac_mysql_c
+    restart: always
+    volumes:
+      - db-volume:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: fnac
+      MYSQL_DATABASE: fnac
+      MYSQL_USER: fnac
+      MYSQL_PASSWORD: fnac
+    ports:
+      - 6033:3306
+
+  web:
+    image: fnac_app_i
+    container_name: fnac_app_c
+    restart: "no"
+    volumes:
+      - ~/fnac/app:/var/www/html/
+    ports:
+      - 8000:80
+    privileged: true
+    depends_on:
+      - db
+
+volumes:
+  db-volume:

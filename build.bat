@@ -1,0 +1,1 @@
+docker build -t fnac_app_i .
