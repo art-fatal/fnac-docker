@@ -21,9 +21,10 @@ services:
     container_name: fnac_app_c
     restart: "no"
     volumes:
-      - ~/fnac/app:/var/www/html/
+      - ../app:/var/www/html/
+      - ./apache/sites-available:/etc/apache2/sites-available/
     ports:
-      - 8000:80
+      - 80:80
     privileged: true
     depends_on:
       - db
